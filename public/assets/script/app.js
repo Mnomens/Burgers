@@ -19,21 +19,20 @@ $(function() {
         $(".box").empty();
     });
 
-    $(".create-form").on("submit", function(event) {
+    $("#submit").on("click", function(event) {
         event.preventDefault();
 
         const newBurger = {
-            burger_name: $("#burgerName").val().trim(),
+            burger_name: $("#burg").val().trim(),
             devoured: 0
         };
-
-        console.log(newBurger)
 
         $.ajax("api/burgers", {
             type: "POST",
             data: newBurger
         }).then(
-            function() {
+            function(results) {
+                console.log("added")
                 location.reload();
             }
         );
