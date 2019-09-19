@@ -4,7 +4,11 @@
 
 <ul>
   {{#each burgers}}
-    <button class="eat-burger" data-id="{{id}}" data-eaten="{{devour}}">Eat the Burger</button>
+    <li>
+      {{#unless devoured}}
+        {{> burgers/burger-file devoured=false}}
+      {{/unless}}
+    </li>
   {{/each}}
 </ul>
 
@@ -12,9 +16,11 @@
 
 <ul>
   {{#each burgers}}
-    {{#if devoured}}
-      {{ sleep=false}}
-    {{/if}}
+    <li>
+      {{#if devoured}}
+        {{> burgers/burger-file devoured=true}}
+      {{/if}}
+    </li>
   {{/each}}
 </ul>
 

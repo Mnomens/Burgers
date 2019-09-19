@@ -1,4 +1,4 @@
-const connection = require("./connection.js");
+const connection = require("../config/connection.js");
 
 function printQuestionMarks(num) {
     var arr = [];
@@ -37,8 +37,14 @@ let orm = {
         })
     },
     insertOne: function(tableName, colNames, tableValues, cb) {
-        let queryString = "INSERT INTO" + tableName + "("+ colNames.toString() + ") VALUES ("+ printQuestionMarks(tableValues.length) + ") ;";
+        let queryString = "INSERT INTO" + tableName;
 
+        queryString += " (";
+		queryString += colNames.toString();
+		queryString += ") ";
+		queryString += "VALUES (";
+		queryString += printQuestionMarks(tableValues.length);
+		queryString += ") ";
         console.log(queryString);
         connection.query(queryString, tableValues, function(err, result) {
             if (err) {
@@ -48,8 +54,12 @@ let orm = {
         })
     },
     updateOne: function(tableName, colName, condition, cb) {
-        let queryString = "UPDATE " + tableName + " SET "+ objToSql(colName) + " WHERE "+ condition;
+        let queryString = "UPDATE " + tableName;
 
+        queryString += " SET ";
+        queryString += objToSql(colName);
+        queryString += " WHERE ";
+        queryString += condition;
         console.log(queryString);
         connection.query(queryString, function(err, result) {
             if (err) {
