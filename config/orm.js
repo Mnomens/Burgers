@@ -37,7 +37,7 @@ let orm = {
         })
     },
     insertOne: function(tableName, colNames, tableValues, cb) {
-        let queryString = "INSERT INTO" + tableName + "("+ colNames.toString() + ") VALUES ("+ printQuestionMarks(tableValues.length) + ");";
+        let queryString = "INSERT INTO" + tableName + "("+ colNames.toString() + ") VALUES ("+ printQuestionMarks(tableValues.length) + ") ;";
 
         console.log(queryString);
         connection.query(queryString, tableValues, function(err, result) {
